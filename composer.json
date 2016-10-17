@@ -1,0 +1,25 @@
+{
+  "name": "primipilus/fileinfo",
+  "description": "provides information about file",
+  "keywords": [
+    "file info",
+    "information about file"
+  ],
+  "homepage": "https://github.com/primipilus/fileinfo",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Leonid Gushchin",
+      "email": "primipilus13@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "primipilus\\fileinfo\\": "src/"
+    }
+  }
+}
