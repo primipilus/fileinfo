@@ -5,6 +5,10 @@
 
 namespace primipilus\fileinfo;
 
+use primipilus\fileinfo\exceptions\FileNotExistsException;
+use primipilus\fileinfo\exceptions\NotFileException;
+use primipilus\fileinfo\exceptions\NotImageException;
+
 /**
  * Class FileTool
  *
@@ -12,6 +16,7 @@ namespace primipilus\fileinfo;
  */
 class FileTool
 {
+
     /**
      * @param string $path
      *
@@ -38,7 +43,7 @@ class FileTool
      *
      * @return bool
      */
-    public static function exists($path) : bool
+    public static function exists(string $path) : bool
     {
         return file_exists($path);
     }
@@ -48,7 +53,7 @@ class FileTool
      *
      * @return string
      */
-    public static function mime($path) : string
+    public static function mime(string $path) : string
     {
         return mime_content_type($path);
     }
@@ -57,9 +62,29 @@ class FileTool
      * @param $path
      *
      * @return PathInfo
+     *
+     * @throws FileNotExistsException
+     * @throws NotFileException
      */
-    public static function info($path) : PathInfo
+    public static function info(string $path) : PathInfo
     {
         return new PathInfo($path);
+    }
+
+    /**
+     * @param string $path
+     *
+     * @return ImageInfo|null
+     *
+     * @throws FileNotExistsException
+     * @throws NotFileException
+     */
+    public static function image(string $path) : ?ImageInfo
+    {
+        try {
+            return new ImageInfo($path);
+        } catch (NotImageException $e) {
+            return null;
+        }
     }
 }

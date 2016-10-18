@@ -5,10 +5,8 @@
 
 namespace primipilus\fileinfo;
 
-use primipilus\fileinfo\exceptions\ {
-    FileNotExistsException,
-    PropertyNotExistsException
-};
+use primipilus\fileinfo\exceptions\FileNotExistsException;
+use primipilus\fileinfo\exceptions\NotFileException;
 
 /**
  * Class PathInfo
@@ -22,6 +20,9 @@ use primipilus\fileinfo\exceptions\ {
  */
 class PathInfo
 {
+
+    use BaseInfo;
+
     /** @var string */
     protected $_dirname;
     /** @var string */
@@ -31,11 +32,17 @@ class PathInfo
     /** @var string */
     protected $_filename;
 
+    /**
+     * PathInfo constructor.
+     *
+     * @param $path
+     *
+     * @throws FileNotExistsException
+     * @throws NotFileException
+     */
     public function __construct($path)
     {
-        if (!file_exists($path)) {
-            throw new FileNotExistsException('file ' . $path . ' not exists');
-        }
+        $this->init($path);
 
         list(
             'dirname' => $this->_dirname,
@@ -43,16 +50,6 @@ class PathInfo
             'extension' => $this->_extension,
             'filename' => $this->_filename
             ) = pathinfo($path);
-    }
-
-    public function __get(string $name)
-    {
-        $method = 'get' . $name;
-        if (method_exists($this, $method)) {
-            return call_user_func([$this, $method]);
-        }
-
-        throw new PropertyNotExistsException();
     }
 
     /**
