@@ -27,4 +27,14 @@ if ($info->isImage) {
     echo 'width: ' . $info->image->width, PHP_EOL;
     echo 'height: ' . $info->image->height, PHP_EOL;
 }
+
+$info2 = new FileInfo($path2);
+
+$info->equals($info2); // :bool
+echo $info->sha1, PHP_EOL;
+echo $info->md5, PHP_EOL;
+
+$info->extensionCorrespondsToMime; // :bool
+$info->extensionsByMime; // :string[]
+
 ```

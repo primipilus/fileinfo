@@ -87,4 +87,28 @@ class FileTool
             return null;
         }
     }
+
+    /**
+     * Calculate the sha1 hash of a file
+     *
+     * @param string $path
+     *
+     * @return null|string
+     */
+    public static function sha1(string $path) : ?string
+    {
+        return sha1_file($path) ?: null;
+    }
+
+    /**
+     * Calculates the md5 hash of a given file
+     *
+     * @param string $path
+     *
+     * @return null|string
+     */
+    public static function md5(string $path) : ?string
+    {
+        return md5_file($path) ?: null;
+    }
 }
