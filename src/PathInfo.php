@@ -50,7 +50,7 @@ class PathInfo
             'filename' => $this->_filename
             ) = $info = pathinfo($path);
 
-        $this->_extension = strtolower($info['extension']);
+        $this->_extension = strtolower($info['extension'] ?? '');
     }
 
     /**
