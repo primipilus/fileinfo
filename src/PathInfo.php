@@ -47,11 +47,10 @@ class PathInfo
         list(
             'dirname' => $this->_dirname,
             'basename' => $this->_basename,
-            'extension' => $this->_extension,
             'filename' => $this->_filename
-            ) = pathinfo($path);
+            ) = $info = pathinfo($path);
 
-        $this->_extension = strtolower($this->_extension);
+        $this->_extension = strtolower($info['extension']);
     }
 
     /**
